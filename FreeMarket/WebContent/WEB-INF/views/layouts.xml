@@ -11,4 +11,20 @@
 		<put-attribute name="top_menu" value="/WEB-INF/views/common/top_menu.jsp"/>
 		<put-attribute name="main" value="/WEB-INF/views/FreeMain/MainPage.jsp"/>
 	</definition>
+	
+	<!-- 판매하기 -->
+
+<definition name="FreeSaleSellwrite.tiles" extends="MainPage.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/FreeSale/FreeSaleSellwrite.jsp"/>
+</definition>
+
+<definition name="FreeSaleBuywrite.tiles" extends="MainPage.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/FreeSale/FreeSaleBuywrite.jsp"/>
+</definition>
+
+
+<definition name="imgupload.tiles" template="/WEB-INF/views/FreeSale/NewFile.jsp">
+</definition>
+
+
 </tiles-definitions>

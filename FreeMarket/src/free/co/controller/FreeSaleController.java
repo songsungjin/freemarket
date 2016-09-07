@@ -3,6 +3,7 @@ package free.co.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -74,6 +75,58 @@ public class FreeSaleController {
 	        System.out.println(bbslist.size() + "사이즈");*/
 	       ///// 
 	     return str;
+	     
+	     
+	     
+	}
+	//판매하기 컨트롤러
+	@RequestMapping(value="FreeSaleSellwrite.do",
+			method={RequestMethod.GET, RequestMethod.POST})
+	public String FreeSaleSellwrite(Model model){
+		logger.info("환영합니다 SistFreeSaleController FreeSaleSellwrite " + new Date());
+		
+		model.addAttribute("doc_title", "아이템 업로드");		
+		return "FreeSaleSellwrite.tiles";
+	}
+	//구매하기 컨트롤러
+	@RequestMapping(value="FreeSaleBuywrite.do",
+			method={RequestMethod.GET, RequestMethod.POST})
+	public String FreeSaleBuywrite(Model model){
+		logger.info("환영합니다 SistFreeSaleController itemBuywrite " + new Date());
+		
+		model.addAttribute("doc_title", "아이템 업로드");		
+		return "FreeSaleBuywrite.tiles";
 	}
 	
+	//판매하기에서 등록 눌렀을때
+	@RequestMapping(value="FreeSalewriteAf.do",
+			method=RequestMethod.POST)
+	public String FreeSalewriteAf(Model model)throws Exception{
+				
+		
+		logger.info("환영합니다 SistFreeSaleController FreeSalewriteAf " + new Date());
+		// Mybatis 삽입
+		
+		return "itemlist.do";
+	}
+	
+	//이미지 사진 클릭했을 시
+	@RequestMapping(value="imgupload.do",
+	method={RequestMethod.GET, RequestMethod.POST})
+	public String imgupload(Model model){
+		logger.info("환영합니다 SistFreeSaleController imgupload " + new Date());
+		
+		model.addAttribute("doc_title", "이미지 업로드");		
+		return "imgupload.tiles";
+	}
+	
+	//이미지 업로드 버튼 눌렀을 시
+	@RequestMapping(value="imgup.do",
+	method={RequestMethod.GET, RequestMethod.POST})
+	public String imgup(Model model, ServletContext session, HttpServletRequest request){
+		logger.info("환영합니다 SistBBSController imgup " + new Date());
+		
+		
+		return "imgup.tiles";
+	}
 }
