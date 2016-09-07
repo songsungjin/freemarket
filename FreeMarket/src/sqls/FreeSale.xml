@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FreeSale">
+	<!-- 판매목록 가져오기  -->
+	<select id="salelist" resultType="free.co.model.FreeSaleDTO">
+		SELECT SEQ, BBS_NUM, ID, TITLE, CONTENT, CATEGORY, PRICE, 
+		DEL, FILENAME, READCOUNT, REGDATE, AUTH
+	FROM 
+		( SELECT ROW_NUMBER() OVER (ORDER BY SEQ ASC) as rnum,  
+		SEQ, BBS_NUM, ID, TITLE, CONTENT, CATEGORY, PRICE, 
+		DEL, FILENAME, READCOUNT, REGDATE, AUTH FROM FREESALE) A
+		WHERE rnum between 0 AND 6
+	</select>
+</mapper>
