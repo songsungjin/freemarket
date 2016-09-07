@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SistPDS">
+
+<select id="getPDSList" 
+	resultType="sist.co.model.SistPDSDTO">
+	SELECT 
+		SEQ,
+		ID, TITLE, CONTENT,
+		FILENAME, READCOUNT, DOWNCOUNT,
+		REGIDATE
+	FROM SISTPDS
+	ORDER BY SEQ	
+</select>
+
+<insert id="uploadPDS"
+	parameterType="sist.co.model.SistPDSDTO">
+	
+	INSERT INTO SISTPDS
+		(SEQ, ID, TITLE, CONTENT,
+		FILENAME, READCOUNT, DOWNCOUNT, REGIDATE)
+	VALUES(SEQ_SIST_PDS.NEXTVAL,
+			#{id}, #{title}, #{content}, #{filename}, 
+			0, 0, SYSDATE)	
+</insert>
+
+<update id="pdsReadCount" parameterType="java.lang.Integer">
+	UPDATE SISTPDS SET
+		READCOUNT=READCOUNT+1
+	WHERE SEQ=#{seq}	
+</update>
+
+<select id="getPDS" resultType="sist.co.model.SistPDSDTO">
+	SELECT SEQ, ID, TITLE, CONTENT, 
+		FILENAME, READCOUNT, DOWNCOUNT, REGIDATE
+	FROM SISTPDS
+	WHERE SEQ=#{seq}	
+</select>
+
+<delete id="pdsdel" parameterType="java.lang.Integer">
+	DELETE FROM SISTPDS 
+	WHERE SEQ=#{seq}
+</delete>
+
+<update id="downloadCount" parameterType="java.lang.Integer">
+	UPDATE SISTPDS SET
+		DOWNCOUNT=DOWNCOUNT+1
+	WHERE SEQ=#{seq}	
+</update>
+
+<update id="updatePDS"
+	parameterType="sist.co.model.SistPDSDTO">
+	UPDATE SISTPDS SET 
+		TITLE=#{title},
+		CONTENT=#{content},
+		FILENAME=#{filename},
+		REGIDATE=SYSDATE
+	WHERE SEQ=#{seq}	
+</update>
+
+</mapper>  
+
+
+
